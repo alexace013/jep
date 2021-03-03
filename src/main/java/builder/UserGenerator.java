@@ -28,7 +28,7 @@ public class UserGenerator implements IJSONGenerator {
                 user = new User();
                 Faker faker = new Faker();
                 user.setUsername(faker.name().username());
-                user.setPassword(faker.idNumber().valid());
+                user.setPassword(faker.finance().bic());
                 user.setCountry(faker.address().country());
                 user.setCity(faker.address().city());
                 jsonObject.put(User.UserAttribute.USERNAME.getAttr(), user.getUsername());
@@ -40,10 +40,20 @@ public class UserGenerator implements IJSONGenerator {
         }
     }
 
+    @SneakyThrows
+    public String printJSON() {
+        if (jsonArray == null) {
+            UserGeneratorException userGeneratorException = new UserGeneratorException(
+                    "JSONArray is null!");
+            log.error(userGeneratorException.getMessage());
+            throw userGeneratorException;
+        }
+        return jsonArray.toString(jsonArray.length());
+    }
+
     public static void main(String[] args) {
         UserGenerator userGenerator = new UserGenerator();
         userGenerator.buildJson(10);
-        System.out.println("\n" + userGenerator.jsonArray.toString(userGenerator.jsonArray.length()));
-        userGenerator.buildJson(0);
+        System.out.println("\n" + userGenerator.printJSON());
     }
 }
