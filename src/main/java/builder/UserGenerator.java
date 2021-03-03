@@ -11,7 +11,6 @@ import org.json.JSONObject;
 @Log4j
 public class UserGenerator implements IJSONGenerator {
 
-    private User user;
     private JSONArray jsonArray;
 
     @SneakyThrows
@@ -25,7 +24,7 @@ public class UserGenerator implements IJSONGenerator {
             jsonArray = new JSONArray();
             for (int count = userCount; count > 0; count--) {
                 JSONObject jsonObject = new JSONObject();
-                user = new User();
+                User user = new User();
                 Faker faker = new Faker();
                 user.setUsername(faker.name().username());
                 user.setPassword(faker.finance().bic());
@@ -35,6 +34,7 @@ public class UserGenerator implements IJSONGenerator {
                 jsonObject.put(User.UserAttribute.PASSWORD.getAttr(), user.getPassword());
                 jsonObject.put(User.UserAttribute.COUNTRY.getAttr(), user.getCountry());
                 jsonObject.put(User.UserAttribute.CITY.getAttr(), user.getCity());
+                log.info(jsonObject.toString());
                 jsonArray.put(jsonObject);
             }
         }
@@ -51,9 +51,7 @@ public class UserGenerator implements IJSONGenerator {
         return jsonArray.toString(jsonArray.length());
     }
 
-    public static void main(String[] args) {
-        UserGenerator userGenerator = new UserGenerator();
-        userGenerator.buildJson(10);
-        System.out.println("\n" + userGenerator.printJSON());
+    public JSONArray getJsonArray() {
+        return jsonArray;
     }
 }
