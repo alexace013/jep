@@ -2,7 +2,6 @@ package builder;
 
 import com.github.javafaker.Faker;
 import entity.Book;
-import entity.User;
 import exeption.BookGeneratorException;
 import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j;
