@@ -1,13 +1,17 @@
 package builder;
 
+import com.github.javafaker.Faker;
 import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j;
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 @Log4j
 public abstract class JSONGenerator {
 
-    protected JSONArray jsonArray;
+    protected JSONArray jsonArray = new JSONArray();
+    protected JSONObject jsonObject;
+    protected Faker faker = new Faker();
 
     abstract void buildJsonWithData(int entityCount);
 

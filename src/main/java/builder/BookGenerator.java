@@ -20,13 +20,12 @@ public class BookGenerator extends JSONGenerator {
             throw bookGeneratorException;
         } else {
             for (int count = bookCount; count > 0; count--) {
-                JSONObject jsonObject = new JSONObject();
                 Book book = new Book();
-                Faker faker = new Faker();
                 book.setAuthor(faker.book().author());
                 book.setGenre(faker.book().genre());
                 book.setPublisher(faker.book().publisher());
                 book.setTitle(faker.book().title());
+                jsonObject = new JSONObject();
                 jsonObject.put(Book.BookAttribute.AUTHOR.getAttr(), book.getAuthor());
                 jsonObject.put(Book.BookAttribute.GENRE.getAttr(), book.getGenre());
                 jsonObject.put(Book.BookAttribute.PUBLISHER.getAttr(), book.getPublisher());

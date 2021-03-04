@@ -20,13 +20,12 @@ public class UserGenerator extends JSONGenerator {
             throw userGeneratorException;
         } else {
             for (int count = userCount; count > 0; count--) {
-                JSONObject jsonObject = new JSONObject();
                 User user = new User();
-                Faker faker = new Faker();
                 user.setUsername(faker.name().username());
                 user.setPassword(faker.finance().bic());
                 user.setCountry(faker.address().country());
                 user.setCity(faker.address().city());
+                jsonObject = new JSONObject();
                 jsonObject.put(User.UserAttribute.USERNAME.getAttr(), user.getUsername());
                 jsonObject.put(User.UserAttribute.PASSWORD.getAttr(), user.getPassword());
                 jsonObject.put(User.UserAttribute.COUNTRY.getAttr(), user.getCountry());
