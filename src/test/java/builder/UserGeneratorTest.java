@@ -15,7 +15,7 @@ public class UserGeneratorTest {
         userGenerator = new UserGenerator();
         SoftAssertions softly = new SoftAssertions();
         softly.assertThatThrownBy(() -> userGenerator.printJSON())
-                .isInstanceOf(UserGeneratorException.class)
+                .isInstanceOf(Exception.class)
                 .hasMessage("JSONArray is null!");
         softly.assertAll();
     }
@@ -25,7 +25,7 @@ public class UserGeneratorTest {
     public void buildJSON_with_0_length() {
         userGenerator = new UserGenerator();
         SoftAssertions softly = new SoftAssertions();
-        softly.assertThatThrownBy(() -> userGenerator.buildJson(0))
+        softly.assertThatThrownBy(() -> userGenerator.buildJsonWithData(0))
                 .isInstanceOf(UserGeneratorException.class)
                 .hasMessage("Incorrect user count value!");
         softly.assertAll();
@@ -36,7 +36,7 @@ public class UserGeneratorTest {
     public void buildJSON_with_minus_1_length() {
         userGenerator = new UserGenerator();
         SoftAssertions softly = new SoftAssertions();
-        softly.assertThatThrownBy(() -> userGenerator.buildJson(-1))
+        softly.assertThatThrownBy(() -> userGenerator.buildJsonWithData(-1))
                 .isInstanceOf(UserGeneratorException.class)
                 .hasMessage("Incorrect user count value!");
         softly.assertAll();

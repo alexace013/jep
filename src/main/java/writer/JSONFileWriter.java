@@ -15,7 +15,7 @@ public class JSONFileWriter {
 
     private static final String TARGET_DIR_PATH = "target/";
     private static final String RESOURCES_DIR_PATH = "src/test/resources/";
-    private static final String FILE_NAME = "test.json";
+    private static final String FILE_NAME = "data.json";
 
     private static void writeFileIntoDirectory(String dirPath,
                                                String fileName,
@@ -42,7 +42,7 @@ public class JSONFileWriter {
 
     public static void main(String[] args) {
         UserGenerator userGenerator = new UserGenerator();
-        userGenerator.buildJson(5);
+        userGenerator.buildJsonWithData(5);
         System.out.println("\n" + userGenerator.printJSON());
         writeJSONFileIntoTargetDirectory(userGenerator.getJsonArray());
         writeJSONFileIntoResourcesDirectory(userGenerator.getJsonArray());

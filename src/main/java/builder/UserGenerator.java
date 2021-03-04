@@ -5,23 +5,20 @@ import entity.User;
 import exeption.UserGeneratorException;
 import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 @Log4j
-public class UserGenerator implements IJSONGenerator {
-
-    private JSONArray jsonArray;
+public class UserGenerator extends JSONGenerator {
 
     @SneakyThrows
-    public void buildJson(int userCount) {
+    @Override
+    public void buildJsonWithData(int userCount) {
         if (userCount <= 0) {
             UserGeneratorException userGeneratorException = new UserGeneratorException(
                     "Incorrect user count value!");
             log.error(userGeneratorException.getMessage());
             throw userGeneratorException;
         } else {
-            jsonArray = new JSONArray();
             for (int count = userCount; count > 0; count--) {
                 JSONObject jsonObject = new JSONObject();
                 User user = new User();
@@ -38,20 +35,5 @@ public class UserGenerator implements IJSONGenerator {
                 jsonArray.put(jsonObject);
             }
         }
-    }
-
-    @SneakyThrows
-    public String printJSON() {
-        if (jsonArray == null) {
-            UserGeneratorException userGeneratorException = new UserGeneratorException(
-                    "JSONArray is null!");
-            log.error(userGeneratorException.getMessage());
-            throw userGeneratorException;
-        }
-        return jsonArray.toString(jsonArray.length());
-    }
-
-    public JSONArray getJsonArray() {
-        return jsonArray;
     }
 }
