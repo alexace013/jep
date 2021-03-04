@@ -1,6 +1,5 @@
 package builder;
 
-import com.github.javafaker.Faker;
 import entity.User;
 import exeption.UserGeneratorException;
 import lombok.SneakyThrows;
@@ -25,6 +24,7 @@ public class UserGenerator extends JSONGenerator {
                 user.setPassword(faker.finance().bic());
                 user.setCountry(faker.address().country());
                 user.setCity(faker.address().city());
+                log.info(user.toString());
                 jsonObject = new JSONObject();
                 jsonObject.put(User.UserAttribute.USERNAME.getAttr(), user.getUsername());
                 jsonObject.put(User.UserAttribute.PASSWORD.getAttr(), user.getPassword());
@@ -34,5 +34,6 @@ public class UserGenerator extends JSONGenerator {
                 jsonArray.put(jsonObject);
             }
         }
+        log.info("User JSON was generated!");
     }
 }

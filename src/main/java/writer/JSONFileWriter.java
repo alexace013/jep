@@ -1,7 +1,7 @@
 package writer;
 
-import builder.BookGenerator;
-import builder.UserGenerator;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j;
 import org.json.JSONArray;
@@ -16,8 +16,6 @@ public class JSONFileWriter {
 
     private static final String TARGET_DIR_PATH = "target/";
     private static final String RESOURCES_DIR_PATH = "src/test/resources/";
-    private static final String USER_FILE_NAME = "user_data.json";
-    private static final String BOOK_FILE_NAME = "book_data.json";
 
     private static void writeFileIntoDirectory(String dirPath,
                                                String fileName,
@@ -30,6 +28,9 @@ public class JSONFileWriter {
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
         bufferedWriter.write(jsonArray.toString(jsonArray.length()));
         bufferedWriter.close();
+        log.info(String.format("File was saved successfully:\ndirectory: %s\nfile name: %s",
+                dirPath, fileName)
+        );
     }
 
     @SneakyThrows
@@ -42,17 +43,12 @@ public class JSONFileWriter {
         writeFileIntoDirectory(RESOURCES_DIR_PATH, fileName, jsonArray);
     }
 
-    public static void main(String[] args) {
-        int count = 5;
-        UserGenerator userGenerator = new UserGenerator();
-        userGenerator.buildJsonWithData(count);
-        System.out.println("\n" + userGenerator.printJSON());
-        writeJSONFileIntoTargetDirectory(USER_FILE_NAME, userGenerator.getJsonArray());
-        writeJSONFileIntoResourcesDirectory(USER_FILE_NAME, userGenerator.getJsonArray());
-        BookGenerator bookGenerator = new BookGenerator();
-        bookGenerator.buildJsonWithData(count);
-        System.out.println("\n" + bookGenerator.printJSON());
-        writeJSONFileIntoTargetDirectory(BOOK_FILE_NAME, bookGenerator.getJsonArray());
-        writeJSONFileIntoResourcesDirectory(BOOK_FILE_NAME, bookGenerator.getJsonArray());
+    @Getter
+    @AllArgsConstructor
+    public enum FileName {
+        USER_FILE_NAME("user_data.json"),
+        BOOK_FILE_NAME("book_data.json");
+
+        private String fileName;
     }
 }

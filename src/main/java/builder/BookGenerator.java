@@ -1,6 +1,5 @@
 package builder;
 
-import com.github.javafaker.Faker;
 import entity.Book;
 import exeption.BookGeneratorException;
 import lombok.SneakyThrows;
@@ -25,6 +24,7 @@ public class BookGenerator extends JSONGenerator {
                 book.setGenre(faker.book().genre());
                 book.setPublisher(faker.book().publisher());
                 book.setTitle(faker.book().title());
+                log.info(book.toString());
                 jsonObject = new JSONObject();
                 jsonObject.put(Book.BookAttribute.AUTHOR.getAttr(), book.getAuthor());
                 jsonObject.put(Book.BookAttribute.GENRE.getAttr(), book.getGenre());
@@ -34,5 +34,6 @@ public class BookGenerator extends JSONGenerator {
                 jsonArray.put(jsonObject);
             }
         }
+        log.info("Book JSON was generated!");
     }
 }
